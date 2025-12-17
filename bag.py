@@ -233,8 +233,16 @@ class KnapsackGUI:
         output_frame = ttk.LabelFrame(self.root, text="输出结果", padding=10)
         output_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        self.output_text = tk.Text(output_frame, height=15, wrap=tk.WORD)
-        scrollbar = tk.Scrollbar(output_frame, orient=tk.VERTICAL, command=self.output_text.yview)
+        # 清空按钮
+        clear_button = tk.Button(output_frame, text="清空输出", command=self.clear_output, width=10)
+        clear_button.pack(anchor=tk.E, pady=(0, 5))
+        
+        # 文本框和滚动条容器
+        text_frame = tk.Frame(output_frame)
+        text_frame.pack(fill=tk.BOTH, expand=True)
+        
+        self.output_text = tk.Text(text_frame, height=15, wrap=tk.WORD)
+        scrollbar = tk.Scrollbar(text_frame, orient=tk.VERTICAL, command=self.output_text.yview)
         self.output_text.configure(yscrollcommand=scrollbar.set)
         
         self.output_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
